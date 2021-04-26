@@ -1,8 +1,11 @@
+import styles from './App.module.css'
 import { LoginPage } from './pages/loginPage/loginPage';
 
 function App() {
   return (
-    <LoginPage/>
+    <div className={styles.App}> 
+      <LoginPage />
+    </div>
   );
 }
 
