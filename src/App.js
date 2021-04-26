@@ -1,12 +1,10 @@
-import styles from './App.module.css'
+import { useSelector } from 'react-redux';
+import styles from './App.module.css';
 import { LoginPage } from './pages/loginPage/loginPage';
 
-function App() {
-  return (
-    <div className={styles.App}> 
-      <LoginPage />
-    </div>
-  );
+const App = () => {
+  const User = useSelector((state) => state.user.name);
+  return <div className={styles.App}>{!User && <LoginPage />}</div>;
 }
 
 export default App;

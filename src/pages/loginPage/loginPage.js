@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button } from '../../components/button/button';
 import { Counter } from '../../components/counter/counter';
 import { TextInput } from '../../components/input/input';
+import { createUser } from '../../store/actions/createUser';
 import styles from './loginPage.module.css';
 
 export const LoginPage = () => {
@@ -9,9 +11,10 @@ export const LoginPage = () => {
   const [value, setValue] = useState('');
   const [error, setError] = useState();
   const [disbaled, setDisabled] = useState(false);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-      isValid(value)
+    isValid(value);
   }, [value]);
 
   const isValid = (value) => {
@@ -20,9 +23,15 @@ export const LoginPage = () => {
     counter > MAX_VALUE ? setError('error') : setError('');
   };
 
+  const onConfirm = (event) => {
+    event.preventDefault();
+    dispatch(createUser(value))
+    setValue('');
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.wrap}>
+      <form className={styles.wrap} onSubmit={onConfirm}>
         <TextInput
           className={error}
           value={value}
@@ -32,7 +41,7 @@ export const LoginPage = () => {
           <Counter value={value.length} maxValue={MAX_VALUE} />
           <Button disabled={disbaled}>Confirm</Button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
