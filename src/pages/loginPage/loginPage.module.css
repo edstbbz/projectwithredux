@@ -11,3 +11,8 @@
   align-items: center;
   height: 100vh;
 }
+
+.button_area {
+  display: flex;
+  justify-content: space-between;
+}
